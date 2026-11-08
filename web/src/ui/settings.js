@@ -69,10 +69,10 @@ export function renderSettings() {
     { value: 3, label: t('think_seconds', 3) },
     { value: 5, label: t('think_seconds', 5) },
     { value: 10, label: t('think_seconds', 10) },
-  ], settings.thinkSeconds, v => { settings.thinkSeconds = v; applySettings(); });
+  ], settings.thinkSeconds, v => { settings.thinkSeconds = v; applySettings(); renderSettings(); });
   el('s-auto').checked = settings.autoAdvance;
   makeChips('s-cat-chips', CATS.map(c => ({ value: c, label: catLabel(c) })),
-    settings.category, v => { settings.category = v; applySettings(); });
+    settings.category, v => { settings.category = v; applySettings(); renderSettings(); });
   el('s-shuffle').checked = settings.shuffle;
   el('s-review-focus').checked = settings.reviewFocus;
   setText('s-known-label', t('known_progress', settings.known.size));

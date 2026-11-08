@@ -34,6 +34,17 @@ test('Settings renders every control', () => {
   assert.equal($('s-cat-chips').children.length, 5);
 });
 
+test('Playback and Deck chips show the new choice as soon as they are clicked', () => {
+  const pressed = id => $(id).children.map(b => b.getAttribute('aria-pressed'));
+  $('s-think-chips').children[3].click(); // 5 s
+  assert.equal(S.settings.thinkSeconds, 5);
+  assert.deepEqual(pressed('s-think-chips'), ['false', 'false', 'false', 'true', 'false']);
+  $('s-cat-chips').children[1].click();
+  assert.equal(S.settings.category, S.CATS[1]);
+  assert.deepEqual(pressed('s-cat-chips'), ['false', 'true', 'false', 'false', 'false']);
+  reset();
+});
+
 test('hands-free listening reveals the answer after the think pause', async () => {
   reset({ thinkSeconds: 1 });
   $('l-primary').click();
