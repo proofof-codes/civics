@@ -2,6 +2,13 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "civics",
   "compatibility_date": "2026-09-12",
+  // The custom domain: a deploy attaches the Worker to it (DNS and the
+  // certificate are Cloudflare's). The proofof.codes zone must be on the
+  // account the Worker deploys to: this directory is bound to the `poc`
+  // Wrangler auth profile (Proof of Codes).
+  "routes": [
+    { "pattern": "civics.proofof.codes", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./dist"
   }

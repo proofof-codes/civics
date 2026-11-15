@@ -71,9 +71,17 @@ npm run sync      # regenerate the question bank from sources + rebuild
 artifact `web/civics-test-study-tool.html`, then copies it to `dist/index.html` for
 wrangler. Edit `web/src/`, never the artifact.
 
+The site is served at **civics.proofof.codes** — `web/wrangler.jsonc` declares it as a
+Worker custom domain, so `npm run deploy` attaches it (DNS record and certificate
+included). The `proofof.codes` zone has to be on the Cloudflare account you deploy to:
+this directory is bound to the `poc` Wrangler auth profile (Proof of Codes account), so
+`npm run deploy` picks it up with no flag. Re-bind with `wrangler auth activate poc <dir>`;
+re-login with `wrangler auth create poc`. Keep the local `wrangler` at 4.149 or newer —
+older versions ignore auth profiles and fall back to the default login.
+
 The privacy policy (`web/src/privacy.html`) is written to `dist/privacy.html` and served
-at `/privacy` — that's the privacy-policy URL for the App Store and Google Play. Update
-it whenever the apps' data handling changes.
+at `/privacy` (https://civics.proofof.codes/privacy) — that's the privacy-policy URL for
+the App Store and Google Play. Update it whenever the apps' data handling changes.
 
 `npm test` runs the web suite: the deck picker and state-answer rules, plus the
 whole app driven in Node against a minimal browser stand-in. Android and Apple have
